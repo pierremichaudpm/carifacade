@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Façade interactive — CARI St-Laurent</title>
+  <meta name="description" content="Tissage de vies — Transformer la façade du CARI en un phare d'accueil vivant sur le boulevard Décarie.">
+  <meta name="theme-color" content="#263164">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260308b">
+</head>
+<body>
+
+  <!-- Progress / sidewalk line -->
+  <div class="sidewalk-progress">
+    <div class="sidewalk-progress__fill" id="progressFill"></div>
+    <div class="sidewalk-progress__labels" id="progressLabels"></div>
+  </div>
+
+  <!-- Logo flottant — dual layer avec crossfade -->
+  <a href="#" class="floating-logo" id="logoHome" aria-label="Retour à l'accueil">
+    <img src="assets/brand/logo-blanc.png" alt="CARI St-Laurent" class="floating-logo__white">
+    <img src="assets/brand/logo-couleur.png" alt="CARI St-Laurent" class="floating-logo__color">
+  </a>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scrollHint">
+    <span class="scroll-hint__text">Défiler pour marcher le boulevard</span>
+    <svg class="scroll-hint__arrow" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M8 16L16 24L24 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M8 8L16 16L24 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- ===== HORIZONTAL TRACK ===== -->
+  <div class="track" id="track">
+
+    <!-- 1. ACCUEIL -->
+    <section class="panel panel--hero" id="accueil" data-label="Accueil">
+      <div class="panel__inner">
+        <div class="hero-split">
+          <div class="hero-split__text">
+            <p class="hero-split__tag">CARI St-Laurent &times; JAXA Production</p>
+            <h1 class="hero-split__title">
+              <span class="hero-split__line">Façade</span>
+              <span class="hero-split__line hero-split__line--accent">interactive</span>
+            </h1>
+            <p class="hero-split__sub">Un phare d'accueil vivant<br>sur le boulevard Décarie</p>
+            <div class="hero-split__thread"></div>
+          </div>
+          <div class="hero-split__image">
+            <img src="assets/images/facade.jpg" alt="Rendu architectural de la façade du CARI St-Laurent" loading="eager">
+            <div class="hero-split__image-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. VISION -->
+    <section class="panel panel--vision" id="vision" data-label="Vision">
+      <div class="panel__inner">
+        <div class="vision-layout">
+          <div class="vision-layout__left">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Tissage<br>de vies</h2>
+          </div>
+          <div class="vision-layout__right">
+            <p class="vision-lead">La façade devient le <strong>premier lieu d'accueil</strong> chaleureux et vivant du CARI, visible dès le boulevard Décarie.</p>
+            <div class="vision-points">
+              <div class="vision-point">
+                <div class="vision-point__marker"></div>
+                <p>Une expérience positive et mémorable pour la clientèle, les passants et les familles.</p>
+              </div>
+              <div class="vision-point">
+                <div class="vision-point__marker"></div>
+                <p>Un espace de dialogue entre les cultures, en cohérence avec la mission d'accueil du CARI.</p>
+              </div>
+              <div class="vision-point">
+                <div class="vision-point__marker"></div>
+                <p>Un phare de fierté pour le quartier, qui fonctionne de jour comme de soir.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Weaving SVG motif -->
+        <svg class="weave-motif weave-motif--vision" viewBox="0 0 200 600" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M100,0 Q150,100 50,200 Q-50,300 100,400 Q200,500 100,600" stroke="#6cbac7" stroke-width="1.5" fill="none" opacity="0.3"/>
+          <path d="M80,0 Q130,120 30,220 Q-70,320 80,420 Q180,520 80,600" stroke="#ffbf3f" stroke-width="1" fill="none" opacity="0.2"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 3. CONCEPT -->
+    <section class="panel panel--concept" id="concept" data-label="Concept">
+      <div class="panel__inner">
+        <span class="section-number section-number--light">02</span>
+        <h2 class="section-title section-title--light">Composantes<br>de l'installation</h2>
+        <div class="components-grid">
+          <div class="component-card" data-reveal>
+            <div class="component-card__icon">
+              <svg viewBox="0 0 80 80" fill="none">
+                <rect x="10" y="15" width="60" height="50" rx="2" stroke="#6cbac7" stroke-width="2"/>
+                <rect x="18" y="22" width="20" height="16" rx="1" stroke="#ffbf3f" stroke-width="1.5"/>
+                <rect x="42" y="22" width="20" height="16" rx="1" stroke="#ffbf3f" stroke-width="1.5"/>
+                <line x1="10" y1="48" x2="70" y2="48" stroke="#6cbac7" stroke-width="1" opacity="0.5"/>
+                <circle cx="30" cy="55" r="3" fill="#ff5c39" opacity="0.6"/>
+                <circle cx="50" cy="55" r="3" fill="#6cbac7" opacity="0.6"/>
+              </svg>
+            </div>
+            <h3 class="component-card__title">Fenêtres animées</h3>
+            <p class="component-card__text">Film LED transparent appliqué sur 2 à 3 fenêtres de la façade. Diffuse des motifs de tissage colorés, des messages d'accueil multilingues et des animations saisonnières — tout en conservant la transparence du vitrage.</p>
+            <ul class="component-card__details">
+              <li>Contenus créés par des artistes issus de l'immigration</li>
+              <li>Co-création avec les usagers du CARI</li>
+              <li>Changement des visuels à distance, sans intervention physique</li>
+            </ul>
+          </div>
+          <div class="component-card" data-reveal>
+            <div class="component-card__icon">
+              <svg viewBox="0 0 80 80" fill="none">
+                <line x1="40" y1="8" x2="40" y2="25" stroke="#6cbac7" stroke-width="2"/>
+                <circle cx="25" cy="35" r="6" stroke="#ffbf3f" stroke-width="1.5" fill="none"/>
+                <circle cx="40" cy="42" r="8" stroke="#ff5c39" stroke-width="1.5" fill="none"/>
+                <circle cx="55" cy="35" r="5" stroke="#6cbac7" stroke-width="1.5" fill="none"/>
+                <line x1="25" y1="41" x2="25" y2="55" stroke="#ffbf3f" stroke-width="1"/>
+                <line x1="40" y1="50" x2="40" y2="65" stroke="#ff5c39" stroke-width="1"/>
+                <line x1="55" y1="40" x2="55" y2="55" stroke="#6cbac7" stroke-width="1"/>
+                <path d="M20,70 Q40,60 60,70" stroke="#263164" stroke-width="1.5" fill="none" opacity="0.4"/>
+              </svg>
+            </div>
+            <h3 class="component-card__title">Carillon de trottoir</h3>
+            <p class="component-card__text">Carillon artistique installé près du trottoir, à portée de main des passants. En le touchant ou en le faisant sonner, les visiteurs créent un lien ludique et sensoriel avec le bâtiment.</p>
+            <ul class="component-card__details">
+              <li>Conçu en collaboration avec un artiste sonore</li>
+              <li>Sonorités évoquant les cultures d'origine de la clientèle</li>
+              <li>Transforme la marche quotidienne en moment de découverte</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VIDÉO -->
+    <section class="panel panel--video" id="video" data-label="Vidéos">
+      <div class="panel__inner">
+        <div class="video-layout">
+          <div class="video-layout__header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">L'expérience<br>en mouvement</h2>
+          </div>
+          <div class="video-layout__grid">
+            <div class="video-block">
+              <video controls preload="metadata" poster="assets/images/facade.jpg">
+                <source src="assets/videos/Animation_immeuble.mp4" type="video/mp4">
+              </video>
+              <p class="video-block__caption">Animation de l'immeuble</p>
+            </div>
+            <div class="video-block">
+              <video controls preload="metadata" poster="assets/images/facade.jpg">
+                <source src="assets/videos/facade_GP.mp4" type="video/mp4">
+              </video>
+              <p class="video-block__caption">Façade — gros plan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PORTES DU QUÉBEC -->
+    <section class="panel panel--portes" id="portes" data-label="Portes du Québec">
+      <div class="panel__inner">
+        <div class="portes-layout">
+          <div class="portes-layout__header">
+            <span class="section-number section-number--light">04</span>
+            <h2 class="section-title section-title--light">Portes<br>du Québec</h2>
+            <p class="portes-layout__sub">Le CARI est la porte d'entrée au Québec. Voici ce qui attend ceux qui la franchissent.</p>
+          </div>
+          <div class="portes-grid">
+            <div class="porte-card" data-reveal data-open-modal="ville" onclick="openModal('ville')">
+              <div class="porte-card__image"><img src="assets/images/quebec/vieux-quebec.jpg" alt="La ville" loading="lazy"></div>
+              <div class="porte-card__info"><h3>La ville</h3><span class="porte-card__more">En savoir plus</span></div>
+            </div>
+            <div class="porte-card" data-reveal data-open-modal="erable" onclick="openModal('erable')">
+              <div class="porte-card__image"><img src="assets/images/quebec/mont-royal.jpg" alt="L'érable" loading="lazy"></div>
+              <div class="porte-card__info"><h3>L'érable</h3><span class="porte-card__more">En savoir plus</span></div>
+            </div>
+            <div class="porte-card" data-reveal data-open-modal="foret" onclick="openModal('foret')">
+              <div class="porte-card__image"><img src="assets/images/quebec/laurentides.jpg" alt="La forêt" loading="lazy"></div>
+              <div class="porte-card__info"><h3>La forêt</h3><span class="porte-card__more">En savoir plus</span></div>
+            </div>
+            <div class="porte-card" data-reveal data-open-modal="hiver" onclick="openModal('hiver')">
+              <div class="porte-card__image"><img src="assets/images/quebec/fleuve-stlaurent.jpg" alt="L'hiver" loading="lazy"></div>
+              <div class="porte-card__info"><h3>L'hiver</h3><span class="porte-card__more">En savoir plus</span></div>
+            </div>
+            <div class="porte-card" data-reveal data-open-modal="saveurs" onclick="openModal('saveurs')">
+              <div class="porte-card__image"><img src="assets/images/quebec/marche.jpg" alt="Les saveurs" loading="lazy"></div>
+              <div class="porte-card__info"><h3>Les saveurs</h3><span class="porte-card__more">En savoir plus</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ARTISTES -->
+    <section class="panel panel--artistes" id="artistes" data-label="Artistes">
+      <div class="panel__inner">
+        <div class="artistes-layout">
+          <div class="artistes-layout__header">
+            <span class="section-number">05</span>
+            <h2 class="section-title">Artistes issus<br>de l'immigration</h2>
+            <p class="artistes-layout__sub">Des oeuvres originales créées en résonance avec la mission du CARI. Co-création, pas achat d'images.</p>
+          </div>
+          <div class="artistes-grid">
+
+            <div class="artist-card" data-artist="pilar" data-open-modal="pilar" onclick="openModal('pilar')">
+              <div class="artist-card__image">
+                <img src="assets/images/artistes/pilar/Pilar_Marcias_Pic1.jpg" alt="Oeuvre de Pilar Marcias" loading="lazy">
+              </div>
+              <div class="artist-card__info">
+                <h3>Pilar Marcias</h3>
+                <span class="artist-card__origin">Mexique</span>
+                <p>Univers coloré et narratif, proche des textiles et des motifs — idéal pour le thème du tissage.</p>
+                <span class="artist-card__btn">Voir le portfolio</span>
+              </div>
+            </div>
+
+            <div class="artist-card" data-artist="eunki" data-open-modal="eunki" onclick="openModal('eunki')">
+              <div class="artist-card__image">
+                <img src="assets/images/artistes/eunki/Eunki_Kim_pic1.jpg" alt="Oeuvre de Eunki Kim" loading="lazy">
+              </div>
+              <div class="artist-card__info">
+                <h3>Eunki Kim</h3>
+                <span class="artist-card__origin">Corée du Sud</span>
+                <p>Travail graphique minimaliste et poétique — idéal pour des animations LED épurées.</p>
+                <span class="artist-card__btn">Voir le portfolio</span>
+              </div>
+            </div>
+
+            <div class="artist-card" data-artist="marwan" data-open-modal="marwan" onclick="openModal('marwan')">
+              <div class="artist-card__image">
+                <img src="assets/images/artistes/marwan/marwan_sekkat_pic1.png" alt="Oeuvre de Marwan Sekkat" loading="lazy">
+              </div>
+              <div class="artist-card__info">
+                <h3>Marwan Sekkat</h3>
+                <span class="artist-card__origin">Maroc</span>
+                <p>Influences géométriques et architecturales — motifs et arabesques adaptables aux fenêtres animées.</p>
+                <span class="artist-card__btn">Voir le portfolio</span>
+              </div>
+            </div>
+
+            <div class="artist-card" data-artist="khosro" data-open-modal="khosro" onclick="openModal('khosro')">
+              <div class="artist-card__image">
+                <img src="assets/images/artistes/khosro/Khosro_Berah_Pic1.jpg" alt="Oeuvre de Khosro Berahmandi" loading="lazy">
+              </div>
+              <div class="artist-card__info">
+                <h3>Khosro Berahmandi</h3>
+                <span class="artist-card__origin">Iran</span>
+                <p>Univers symbolique et onirique — compositions narratives sur le thème du voyage et des trajectoires.</p>
+                <span class="artist-card__btn">Voir le portfolio</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TECHNOLOGIE -->
+    <section class="panel panel--tech" id="tech" data-label="Technologie">
+      <div class="panel__inner">
+        <div class="tech-layout">
+          <div class="tech-layout__left">
+            <span class="section-number section-number--light">06</span>
+            <h2 class="section-title section-title--light">Simple.<br>Robuste.<br>Évolutif.</h2>
+          </div>
+          <div class="tech-layout__right">
+            <div class="tech-item">
+              <h3>Film LED transparent</h3>
+              <p>Modules remplaçables section par section. Transparence conservée sur les fenêtres.</p>
+            </div>
+            <div class="tech-item">
+              <h3>Serveurs Raspberry Pi</h3>
+              <p>Technologie éprouvée, économique (200–400 $&nbsp;CAD l'unité) et facilement remplaçable.</p>
+            </div>
+            <div class="tech-item">
+              <h3>Capteurs inclusifs</h3>
+              <p>Mouvement, contact, bouton — séquences lumineuses ou sonores discrètes et inclusives.</p>
+            </div>
+            <div class="tech-divider"></div>
+            <div class="tech-evolution">
+              <h3>Infrastructure évolutive</h3>
+              <p>Contenus standardisés, mises à jour sans reprogrammation. Thématiques saisonnières, journées spéciales, co-création avec les usagers. L'investissement se bonifie d'année en année.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PHASES & BUDGET -->
+    <section class="panel panel--budget" id="budget" data-label="Budget">
+      <div class="panel__inner">
+        <div class="budget-layout">
+          <div class="budget-layout__header">
+            <span class="section-number">06</span>
+            <h2 class="section-title">Phases<br>&amp; budget</h2>
+          </div>
+          <div class="budget-content">
+            <div class="phases-timeline">
+              <div class="phase-block phase-block--active">
+                <div class="phase-block__label">Phase 1 — Année 1</div>
+                <p>2–3 fenêtres LED + 1 module interactif + 1 zone sonore. Première collaboration artistique. Tests et ajustements.</p>
+              </div>
+              <div class="phase-block">
+                <div class="phase-block__label">Phase 2 — Année 2</div>
+                <p>Compléter d'autres fenêtres, enrichir les contenus, programmation saisonnière.</p>
+              </div>
+              <div class="phase-block">
+                <div class="phase-block__label">Années suivantes</div>
+                <p>Renouvellement régulier, nouveaux artistes, intégration à d'autres projets numériques du CARI.</p>
+              </div>
+            </div>
+            <div class="budget-table">
+              <h3>Budget indicatif — Phase 1</h3>
+              <div class="budget-row">
+                <span class="budget-row__label">Matériel &amp; équipements</span>
+                <span class="budget-row__range">8 300 $ – 19 000 $</span>
+              </div>
+              <div class="budget-row">
+                <span class="budget-row__label">Création de contenu</span>
+                <span class="budget-row__range">18 000 $ – 27 000 $</span>
+              </div>
+              <div class="budget-row">
+                <span class="budget-row__label">Installation &amp; intégration</span>
+                <span class="budget-row__range">10 500 $ – 16 000 $</span>
+              </div>
+              <div class="budget-row budget-row--total">
+                <span class="budget-row__label">Total Phase 1</span>
+                <span class="budget-row__range">37 000 $ – 55 000 $ CAD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FINANCEMENT & RETOMBÉES -->
+    <section class="panel panel--funding" id="financement" data-label="Financement">
+      <div class="panel__inner">
+        <div class="funding-layout">
+          <div class="funding-col">
+            <span class="section-number section-number--light">07</span>
+            <h2 class="section-title section-title--light">Financement<br>&amp; retombées</h2>
+            <div class="funding-sources">
+              <h3>Sources possibles</h3>
+              <div class="funding-tag-group">
+                <span class="funding-tag">SODEC</span>
+                <span class="funding-tag">CALQ</span>
+                <span class="funding-tag">Min. Immigration</span>
+                <span class="funding-tag">Patrimoine canadien</span>
+                <span class="funding-tag">IRCC</span>
+                <span class="funding-tag">Ville de Montréal</span>
+                <span class="funding-tag">MAI Montréal</span>
+              </div>
+            </div>
+          </div>
+          <div class="funding-col">
+            <div class="retombees">
+              <h3>Retombées attendues</h3>
+              <div class="retombee-item">
+                <span class="retombee-item__number">+</span>
+                <div>
+                  <strong>Achalandage</strong>
+                  <p>Augmentation du temps passé près de la façade et des zones extérieures.</p>
+                </div>
+              </div>
+              <div class="retombee-item">
+                <span class="retombee-item__number">+</span>
+                <div>
+                  <strong>Engagement</strong>
+                  <p>Interactions avec le carillon et les dispositifs interactifs.</p>
+                </div>
+              </div>
+              <div class="retombee-item">
+                <span class="retombee-item__number">+</span>
+                <div>
+                  <strong>Visibilité</strong>
+                  <p>Notoriété accrue dans le quartier et les médias locaux.</p>
+                </div>
+              </div>
+              <div class="retombee-item">
+                <span class="retombee-item__number">#</span>
+                <div>
+                  <strong>Partage</strong>
+                  <p>Photos et vidéos sur les réseaux sociaux — #CARIStLaurent</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. PROCHAINES ÉTAPES -->
+    <section class="panel panel--next" id="etapes" data-label="Prochaines étapes">
+      <div class="panel__inner">
+        <div class="next-layout">
+          <span class="section-number">08</span>
+          <h2 class="section-title">Prochaines<br>étapes</h2>
+          <ol class="next-steps">
+            <li data-reveal>Valider le principe et choisir la direction artistique.</li>
+            <li data-reveal>Travailler avec les architectes sur une présentation 3D et le parcours des câbles.</li>
+            <li data-reveal>Consulter les usagers (focus groups, ateliers) pour orienter les contenus.</li>
+            <li data-reveal>Sélectionner les artistes en collaboration avec le CARI et le MAI.</li>
+            <li data-reveal>Finaliser les devis techniques et lancer les appels d'offres.</li>
+          </ol>
+          <div class="next-cta">
+            <p class="next-cta__text">JAXA Production accompagnera le CARI dans la conception,<br>la production numérique et la mise en oeuvre.</p>
+            <div class="next-cta__logos">
+              <img src="assets/brand/logo-couleur.png" alt="CARI St-Laurent" width="700">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /track -->
+
+  <!-- ===== MODALES ARTISTES ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modalClose" aria-label="Fermer">&times;</button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Weaving thread canvas -->
+  <canvas id="weaveCanvas" class="weave-canvas" aria-hidden="true"></canvas>
+
+  <script src="js/app.js?v=20260308b"></script>
+</body>
+</html>
