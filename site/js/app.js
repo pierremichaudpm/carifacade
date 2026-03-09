@@ -25,47 +25,54 @@
   let rafId = null;
   let hintHidden = false;
 
-  // --- Modal data (artists + components) ---
+  // --- Modal data (artists + components + concept) ---
   const modalData = {
-    // Portes du Québec
-    ville: {
-      name: 'La ville',
-      origin: 'Montréal et ses quartiers',
-      desc: 'Montréal est une ville vibrante et cosmopolite, où se côtoient plus de 120 communautés culturelles. Ses quartiers — du Plateau au Vieux-Port, de Saint-Laurent à Côte-des-Neiges — sont autant de portes d\'entrée vers une vie riche en découvertes, en culture et en opportunités.',
+    // Composantes Concept
+    fenetres: {
+      name: 'Fenêtres animées',
+      origin: '',
+      desc: '<h3>Objectifs</h3><ul><li>Contribuer à l\'animation et à la mise en valeur du trottoir et de la façade du CARI St‑Laurent, en créant un point d\'intérêt visuel dynamique qui améliore la lisibilité du lieu dans l\'espace public.</li><li>Améliorer l\'expérience des usagers et des passants en offrant une interface accueillante, lisible et interactive, qui favorise le sentiment de bienvenue et l\'appropriation positive du site.</li><li>Disposer d\'un outil de communication flexible permettant de diffuser des informations sur les services, ainsi que des contenus liés aux événements et campagnes du CARI, de manière visible et actualisable en continu.</li><li>Assurer une exploitation pérenne et maîtrisée.</li></ul><h3>Avantages</h3><ul><li>Contenus visibles de jour et de nuit — Visibilité 24/7 même lorsque le centre est fermé</li><li>Équipement technique à l\'intérieur à l\'abri des intempéries</li><li>Laisse la lumière naturelle passer à 85\u00A0% durant le jour</li><li>Découpe sur mesure selon les dimensions exactes des fenêtres</li><li>Déclenchement interactif au passage des passants et des clients sur le trottoir</li><li>Adaptabilité du temps de diffusion et du contenu selon les besoins du CARI St-Laurent (événement, saison, etc.)</li><li>Faible consommation énergétique et respectueux de l\'environnement</li></ul>',
       images: []
     },
-    erable: {
-      name: 'L\'érable',
-      origin: 'Symbole du Québec',
-      desc: 'L\'érable est l\'emblème du Canada et du Québec. Son sirop, ses couleurs d\'automne flamboyantes et sa résilience face aux hivers rigoureux en font un symbole puissant d\'accueil et d\'enracinement pour ceux qui choisissent cette terre.',
+    carillon: {
+      name: 'Carillon de trottoir',
+      origin: '',
+      desc: '<h3>Objectifs</h3><ul><li>Contribuer à l\'animation et à la mise en valeur du trottoir devant le CARI en créant un point d\'intérêt visuel et sonore qui incite les passants à s\'arrêter et à fréquenter le site.</li><li>Favoriser les échanges informels, le sentiment de convivialité et l\'appropriation positive de l\'espace public par les usagers du CARI et les résidents du quartier, grâce à une expérience partagée simple et accessible.</li><li>Renforcer la présence de l\'art dans l\'espace public comme vecteur de qualité de vie, de cohésion communautaire et de fierté locale.</li></ul><h3>Avantages</h3><ul><li>Complète les fenêtres animées et transforme le trottoir en véritable lieu culturel : on commence à « vivre » le CARI dès l\'extérieur.</li><li>Conçu avec un artiste, le carillon devient une signature esthétique forte, immédiatement associée au CARI.</li><li>Son animation douce donne l\'impression d\'un espace public plus habité, convivial et rassurant, notamment pour les familles et les personnes nouvellement arrivées.</li><li>Dispositif léger et peu intrusif, il améliore l\'ambiance sans nuire à la circulation ni au voisinage.</li></ul>',
       images: []
     },
-    foret: {
-      name: 'La forêt',
-      origin: 'Les grands espaces',
-      desc: 'Les forêts québécoises — boréales, mixtes, laurentiennes — couvrent plus de la moitié du territoire. Elles offrent un espace de ressourcement, de plein air et de connexion avec la nature, accessibles à quelques minutes de la ville.',
-      images: []
+    // Fenêtres du Québec
+    lieux: {
+      name: 'Fenêtre — Lieux de vie',
+      origin: '',
+      desc: 'Cette fenêtre présente des paysages urbains et ruraux du Québec, pour montrer la diversité des milieux où l\'on peut vivre, travailler et s\'ancrer. Elle invite chacun à se projeter dans ces lieux et à imaginer son propre quotidien ici.<br><br><em>Image de Eunki Kim : la façade enneigée</em>',
+      images: ['assets/images/Fenetres/Eunki%20Kim_pic2.jpg']
     },
-    hiver: {
-      name: 'L\'hiver',
-      origin: 'Saison fondatrice',
-      desc: 'L\'hiver québécois est une expérience unique : neige abondante, sports de glisse, marchés de Noël, cabanes à sucre. Loin d\'être un obstacle, c\'est une saison célébrée qui forge le caractère et crée des traditions partagées.',
-      images: []
+    nature: {
+      name: 'Fenêtre — La nature et les saisons',
+      origin: '',
+      desc: 'Cette fenêtre ouvre sur la nature québécoise : fleuve, lacs, forêts, faune et flore. Elle rappelle le lien fort entre la population et le territoire, et propose d\'entrer dans la société québécoise par l\'émerveillement et le respect de l\'environnement.<br><br><em>Image dans le style de Khosro Berahmandi (générée par l\'IA)</em>',
+      images: ['assets/images/Fenetres/Pilar_Marcias_Pic1.jpg']
     },
-    saveurs: {
-      name: 'Les saveurs',
-      origin: 'Gastronomie métissée',
-      desc: 'La cuisine québécoise est un métissage de traditions françaises, autochtones et de toutes les vagues d\'immigration. Des bagels de Saint-Viateur à la poutine, des marchés Jean-Talon et Atwater aux restaurants du monde entier — chaque saveur raconte une histoire d\'accueil.',
-      images: []
+    habitants: {
+      name: 'Fenêtre — Les habitants et les langues',
+      origin: '',
+      desc: 'Cette fenêtre met en scène la diversité des cultures qui composent le Québec, avec des images de personnes et le mot « Bienvenue » en plusieurs langues. Elle montre que la société québécoise se construit avec toutes et tous, d\'ici et d\'ailleurs.',
+      images: ['assets/images/Fenetres/marwan%20sekkat_pic1.png']
+    },
+    services: {
+      name: 'Fenêtre — Le CARI St‑Laurent',
+      origin: 'Services et événements',
+      desc: 'Cette fenêtre présente les services, ressources et informations du CARI St‑Laurent. Elle fait le lien entre les images du Québec et un lieu concret d\'accueil et d\'accompagnement, une porte d\'entrée directe pour participer à la vie de la société.',
+      images: ['assets/images/Fenetres/img_info2.png']
     },
     // Artists
     pilar: {
-      name: 'Pilar Marcias',
-      origin: 'Mexique — La Pocatière',
-      desc: 'Artiste multidisciplinaire mexicaine installée au Québec. Son univers coloré et narratif, proche des textiles et des motifs traditionnels, se prête naturellement au thème du tissage interculturel. Ses installations intègrent souvent des éléments photographiques et sculpturaux dans l\'espace public.',
+      name: 'Pilar Macias',
+      origin: 'Mexique',
+      desc: 'Pilar Macias est une artiste en arts visuels originaire du Mexique, immigrée au Québec, qui travaille principalement à partir de la photographie comme matière. Elle découpe, coud et assemble des images pour les décontextualiser, créer de nouvelles formes et explorer les liens entre lieux, corps et souvenirs. Dans ses projets récents, elle dépasse le simple support photographique pour utiliser aussi l\'aluminium (durable) et les feuilles d\'arbres (fragiles), jouant sur la tension entre ancrage et vulnérabilité.<br><br>Dans ses œuvres, les images sont fragmentées puis recomposées en nouvelles formes – cartographies sensibles, silhouettes, trames – qui évoquent les déplacements, les passages et les points d\'ancrage d\'une vie entre plusieurs lieux. Elle utilise parfois des matériaux durables (comme le métal ou l\'aluminium) en dialogue avec des éléments fragiles ou organiques, créant une tension entre solidité et vulnérabilité, permanence et effacement.<br><br>Son univers visuel est habité par des notions de mémoire, de traces et de couches : chaque pièce ressemble à un palimpseste où s\'inscrivent à la fois le souvenir du pays d\'origine, la découverte d\'un nouveau territoire et le vécu du quotidien. En choisissant de vivre hors des grandes villes, Pilar Macias accorde une place centrale au paysage, à la lumière et aux rythmes de la nature, qui deviennent des partenaires de création autant que des sujets.<br><br>Sa démarche peut se lire comme une exploration poétique de la manière dont on habite un lieu : comment les expériences, les voyages et les déplacements laissent des marques, comment elles se déposent en nous et dans le paysage. En reconfigurant les images, elle propose au regardeur de revisiter ses propres souvenirs et de reconnaître, dans ces assemblages, la complexité et la beauté des identités en mouvement.',
+      video: 'https://player.vimeo.com/video/304261038',
       images: [
         'assets/images/artistes/pilar/Pilar_Marcias_Pic1.jpg',
-        'assets/images/artistes/pilar/Pilar_Marcias_Pic2.jpg',
         'assets/images/artistes/pilar/Pilar_Marcias_Pic3.jpg',
         'assets/images/artistes/pilar/Pilar_Marcias_Pic4.jpg',
       ]
@@ -73,34 +80,35 @@
     eunki: {
       name: 'Eunki Kim',
       origin: 'Corée du Sud',
-      desc: 'Artiste coréenne au travail graphique minimaliste et poétique. Ses peintures expressives de paysages montréalais offrent un regard neuf sur la ville d\'accueil — idéal pour des animations LED épurées qui capturent l\'essence du quartier.',
+      desc: 'Eunki Kim est une artiste visuelle et illustratrice originaire de Corée du Sud, installée à Montréal, dont le travail est profondément marqué par les thèmes du déplacement, de l\'identité et du quotidien rêvé. Elle développe un univers graphique narratif où l\'on rencontre souvent des personnages en transition, en marche, en observation, en flottement, pris entre intériorité et monde extérieur.<br><br>Son art se caractérise par une ligne sensible et une palette qui donne à ses images une atmosphère à la fois délicate et accessible. Les compositions mêlent éléments urbains, fragments de nature et détails de la vie de tous les jours (objets, gestes, postures), comme pour montrer comment les personnes habitent les lieux et comment les lieux, en retour, façonnent les personnes.<br><br>Sur le plan thématique, Eunki Kim s\'intéresse aux émotions fines : la solitude, la curiosité, la nostalgie, mais aussi la tendresse et le réconfort que l\'on trouve dans de petites scènes ordinaires. Ses images fonctionnent souvent comme de petites histoires silencieuses, ouvertes à l\'interprétation, où chacun peut projeter sa propre expérience de déplacement, d\'adaptation ou de recherche de repères.<br><br>Sa mission artistique peut se lire comme la volonté de créer des espaces visuels d\'empathie : des images qui donnent à voir la vulnérabilité sans la dramatiser, qui rendent visibles des états intérieurs souvent invisibles et qui invitent le public à reconnaître sa propre sensibilité dans celle des autres. En combinant douceur formelle et profondeur émotionnelle, Eunki Kim cherche à offrir un langage visuel simple en apparence, mais chargé de nuances, où les frontières entre ici et ailleurs, entre rêve et réalité, deviennent des zones de rencontre plutôt que de séparation.',
       images: [
         'assets/images/artistes/eunki/Eunki_Kim_pic1.jpg',
         'assets/images/artistes/eunki/Eunki_Kim_pic2.jpg',
         'assets/images/artistes/eunki/Eunki_Kim_pic3.jpg',
-        'assets/images/artistes/eunki/Eunki_Kim_pic4.jpg',
+        'assets/images/artistes/eunki/euniki%20KIm%205.jpg',
       ]
     },
     marwan: {
       name: 'Marwan Sekkat',
       origin: 'Maroc',
-      desc: 'Artiste marocain aux influences géométriques et architecturales. Son travail mêle abstraction pixelisée et figuration décomposée, proposant des motifs et arabesques contemporains parfaitement adaptables aux fenêtres animées de la façade.',
+      desc: 'Marwan Sekkat est un artiste interdisciplinaire franco-marocain résidant au Québec. La simulation, le vivant, le détournement, l\'erreur et l\'absurde sont au cœur de ses préoccupations.<br><br>Ses œuvres prennent souvent la forme d\'installations spatiales où se mêlent projections, dispositifs automatisés, glitch, VJing, réalité virtuelle et éléments matériels, afin de créer des environnements immersifs qui rejouent ou « simulent » des fragments de réel. En parallèle, il intègre des techniques issues de l\'artisanat – ébénisterie, travail textile, botanique, broderie marocaine – pour dissimuler ou hybrider le numérique, comme si les circuits, les algorithmes et les pixels se matérialisaient dans des objets sensibles et faits main.<br><br>Une part importante de sa recherche porte sur la transmission et la mémoire : il met en scène et fige dans le temps des souvenirs, des gestes et des motifs liés à son histoire familiale et à ses identités culturelles multiples. Son travail interroge ainsi les relations entre mémoire individuelle et mémoire collective, entre héritage colonial (France-Maroc) et nouvelles expériences vécues au Québec, dans une perspective clairement décoloniale.<br><br>En développant une grammaire visuelle et matérielle qui combine expérimentation technologique et sensibilité artisanale, Marwan Sekkat cherche à offrir au public des moments de pause et de déplacement du regard, où l\'on peut ressentir autrement le temps, la nature, les objets et les récits qui nous entourent. Son œuvre invite à habiter l\'entre-deux : entre réel et simulacre, tradition et innovation, intime et politique.',
+      video: 'https://www.youtube.com/embed/La8zsz3Zi8U',
       images: [
         'assets/images/artistes/marwan/marwan_sekkat_pic1.png',
         'assets/images/artistes/marwan/marwan_sekkat_pic2.png',
         'assets/images/artistes/marwan/marwan_sekkat_pic3.png',
-        'assets/images/artistes/marwan/marwan_sekkat_pic4.png',
       ]
     },
     khosro: {
       name: 'Khosro Berahmandi',
       origin: 'Iran',
-      desc: 'Artiste iranien reconnu pour son univers symbolique et onirique. Ses compositions mêlant silhouettes, motifs ornementaux et couleurs riches (rouges, bleus, ors) sont particulièrement inspirantes pour des narratives visuelles sur le thème du voyage et des trajectoires migratoires.',
+      desc: 'Khosro Berahmandi est un artiste multidisciplinaire d\'origine iranienne, installé à Montréal depuis les années 1980, dont l\'œuvre déploie un univers foisonnant, proche d\'une mythologie personnelle.<br><br>Son travail s\'inspire de l\'iconographie des miniatures iraniennes et indo-iraniennes, qu\'il transpose dans une écriture résolument contemporaine. Ses tableaux et dessins sont peuplés de figures hybrides, anthropomorphes et organiques, rassemblées en un véritable « bestiary » semi-figuratif où humains, animaux et formes végétales semblent cohabiter dans un même cosmos. Les compositions sont denses, labyrinthiques, construites par couches de motifs, de lignes et de couleurs qui invitent le regard à se perdre dans le détail.<br><br>Son art explore une cosmologie intime : un monde intérieur où se mêlent mémoire, exil, spiritualité et quête de l\'invisible. L\'artiste travaille beaucoup sur la tension entre ombre et lumière, notamment par une recherche autour du noir et des strates cachées de la couleur pour faire émerger des formes de vie « invisibles » qui germent dans l\'obscurité. Chaque œuvre fonctionne comme une carte secrète, une cartographie cachée où se tissent des « fils éternels » entre différents temps, lieux et êtres.<br><br>Au fil de plus de cinquante expositions au Canada, en Europe et aux États-Unis, Khosro Berahmandi a développé une pratique où le geste minutieux, la répétition du motif et la richesse symbolique créent une expérience quasi méditative pour le regardeur. Son parcours en exil, son engagement de longue date au sein du Festival Accès Asie et sa reconnaissance (notamment le Prix Charles-Biddle en 2022) situent son travail au croisement de la création visuelle, du dialogue interculturel et de la transmission.',
+      video: 'https://www.facebook.com/plugins/video.php?height=560&href=https%3A%2F%2Fwww.facebook.com%2Fwatch%2F%3Fv%3D770795905605889&show_text=false&width=314',
+      videoReel: true,
       images: [
         'assets/images/artistes/khosro/Khosro_Berah_Pic1.jpg',
         'assets/images/artistes/khosro/Khosro_Berah_Pic2.jpg',
         'assets/images/artistes/khosro/Khosro_Berah_Pic3.jpg',
-        'assets/images/artistes/khosro/Khosro_Berah_Pic4.jpg',
       ]
     }
   };
@@ -149,6 +157,7 @@
   // SCROLL HANDLING
   // ============================================================
   function onWheel(e) {
+    if (modalOverlay.classList.contains('is-open')) return;
     e.preventDefault();
     const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
     targetX = Math.max(0, Math.min(targetX + delta * 1.2, maxScroll));
@@ -334,20 +343,42 @@
     const data = modalData[key];
     if (!data) return;
 
-    const galleryHTML = data.images.length
-      ? `<div class="modal__gallery">
-          ${data.images.map(src => `<img src="${src}" alt="Oeuvre de ${data.name}" loading="lazy">`).join('')}
+    const singleClass = data.images.length === 1 ? ' modal__gallery--single' : '';
+    const reelClass = data.videoReel ? ' modal__gallery-video--reel' : '';
+    const videoThumb = data.video
+      ? `<div class="modal__gallery-video${reelClass}" data-video-src="${data.video}" data-reel="${data.videoReel ? '1' : ''}">
+          <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.5)"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+        </div>`
+      : '';
+
+    const items = data.images.map(src => `<img src="${src}" alt="Oeuvre de ${data.name}" loading="lazy">`).join('');
+    const galleryHTML = (data.images.length || data.video)
+      ? `<div class="modal__gallery${singleClass}">
+          ${items}${videoThumb}
         </div>`
       : '';
 
     modalContent.innerHTML = `
       <div class="modal__artist-header">
         <h2>${data.name}</h2>
-        <span>${data.origin}</span>
-        <p>${data.desc}</p>
+        ${data.origin ? `<span>${data.origin}</span>` : ''}
+        <div class="modal__desc">${data.desc}</div>
       </div>
       ${galleryHTML}
     `;
+
+    // Video thumbnail click → open player inline (replace thumb)
+    const vThumb = modalContent.querySelector('.modal__gallery-video');
+    if (vThumb) {
+      vThumb.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const src = this.dataset.videoSrc;
+        // Replace thumbnail with inline iframe
+        this.innerHTML = `<iframe src="${src}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;border-radius:12px;"></iframe>`;
+        this.style.cursor = 'default';
+        this.style.background = '#000';
+      });
+    }
 
     modalOverlay.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -356,6 +387,8 @@
   function closeModal() {
     modalOverlay.classList.remove('is-open');
     document.body.style.overflow = '';
+    // Stop any playing video
+    modalContent.querySelectorAll('iframe').forEach(f => f.src = '');
   }
 
   // ============================================================

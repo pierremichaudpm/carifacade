@@ -430,6 +430,22 @@ body.on-light .sidewalk-progress {
   left: 0;
   color: var(--turquoise);
 }
+.component-card__cta {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.55rem 1.4rem;
+  background: var(--vermillon);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.2s;
+}
+.component-card:hover .component-card__cta {
+  background: #ff7a5c;
+  transform: translateY(-1px);
+}
 
 /* ============================================================
    4. VIDÉO
@@ -453,8 +469,10 @@ body.on-light .sidewalk-progress {
 .video-block {
   position: relative;
 }
-.video-block video {
+.video-block video,
+.video-block iframe {
   width: 100%;
+  border: none;
   border-radius: 12px;
   background: var(--noir);
   aspect-ratio: 16/9;
@@ -477,10 +495,16 @@ body.on-light .sidewalk-progress {
 }
 .portes-layout {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   height: 100%;
+  gap: 3rem;
+}
+.portes-layout__header {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 2rem;
 }
 .portes-layout__sub {
   color: rgba(255,255,255,0.6);
@@ -491,8 +515,10 @@ body.on-light .sidewalk-progress {
 }
 .portes-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  flex: 1;
+  max-height: 70vh;
 }
 .porte-card {
   background: rgba(255,255,255,0.08);
@@ -513,7 +539,7 @@ body.on-light .sidewalk-progress {
   box-shadow: 0 16px 48px rgba(0,0,0,0.3);
 }
 .porte-card__image {
-  aspect-ratio: 16/9;
+  aspect-ratio: 9/16;
   overflow: hidden;
 }
 .porte-card__image img {
@@ -536,17 +562,27 @@ body.on-light .sidewalk-progress {
   font-size: 1.1rem;
   color: var(--blanc);
 }
+.porte-card__desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.45;
+  margin-top: 0.3rem;
+}
 .porte-card__more {
   display: inline-block;
-  margin-top: 0.35rem;
-  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--turquoise);
-  letter-spacing: 0.05em;
-  transition: color 0.3s;
+  color: #fff;
+  background: var(--vermillon);
+  border-radius: 5px;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.2s;
 }
 .porte-card:hover .porte-card__more {
-  color: var(--dore);
+  background: #ff7a5c;
+  transform: translateY(-1px);
 }
 
 /* ============================================================
@@ -611,7 +647,7 @@ body.on-light .sidewalk-progress {
   margin-bottom: 0.15rem;
 }
 .artist-card__origin {
-  display: inline-block;
+  display: block;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -634,13 +670,11 @@ body.on-light .sidewalk-progress {
   color: var(--blanc);
   font-size: 0.8rem;
   font-weight: 600;
-  transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-  box-shadow: 0 4px 20px rgba(255, 92, 57, 0.3);
+  transition: background 0.3s, transform 0.3s;
 }
 .artist-card__btn:hover {
   background: #e54d2a;
   transform: translate3d(0, -2px, 0);
-  box-shadow: 0 8px 30px rgba(255, 92, 57, 0.5);
 }
 
 /* ============================================================
@@ -996,13 +1030,73 @@ body.on-light .sidewalk-progress {
 .modal__gallery img {
   width: 100%;
   border-radius: 12px;
-  aspect-ratio: 4/3;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s;
   cursor: zoom-in;
 }
 .modal__gallery img:hover {
   transform: scale(1.02);
+}
+.modal__gallery--single {
+  grid-template-columns: 1fr;
+  max-width: 280px;
+}
+.modal__gallery--single img {
+  aspect-ratio: 9/16;
+}
+.modal__gallery-video {
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  background: var(--bleu);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.modal__gallery-video--reel {
+  aspect-ratio: 9/16;
+  grid-row: span 2;
+}
+.modal__gallery-video:hover {
+  background: #1a2248;
+}
+.modal__gallery-video svg {
+  width: 64px;
+  height: 64px;
+}
+.modal__video-player {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__video-player-inner {
+  position: relative;
+  width: 80vw;
+  max-width: 900px;
+  aspect-ratio: 16/9;
+}
+.modal__video-player-inner iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+.modal__video-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
 }
 
 /* ============================================================
