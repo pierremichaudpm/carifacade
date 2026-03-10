@@ -68,8 +68,6 @@ strong { font-weight: 600; }
 
 .panel__inner {
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
   height: 100%;
   padding: 4rem 6rem;
   padding-top: 10rem;
@@ -1141,7 +1139,7 @@ body.on-light .sidewalk-progress {
    RESPONSIVE — SHORT DESKTOP (viewport height ≤ 800px)
    Reduces sizes so content fits in 100vh on laptops
    ============================================================ */
-@media (max-height: 800px) and (min-width: 1025px) {
+@media (max-height: 950px) and (min-width: 1025px) {
   .panel__inner {
     padding: 2rem 4rem;
     padding-top: 6rem;
