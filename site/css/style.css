@@ -376,7 +376,7 @@ body.on-light .sidewalk-progress {
    ============================================================ */
 .panel--concept {
   background: var(--bleu);
-  width: 85vw;
+  width: 100vw;
 }
 .components-grid {
   display: grid;
@@ -461,7 +461,7 @@ body.on-light .sidewalk-progress {
    ============================================================ */
 .panel--video {
   background: var(--blanc);
-  width: 90vw;
+  width: 100vw;
 }
 .video-layout {
   display: flex;
@@ -500,7 +500,7 @@ body.on-light .sidewalk-progress {
    ============================================================ */
 .panel--portes {
   background: var(--bleu);
-  width: 115vw;
+  width: 100vw;
 }
 .portes-layout {
   display: flex;
@@ -599,7 +599,7 @@ body.on-light .sidewalk-progress {
    ============================================================ */
 .panel--artistes {
   background: var(--brume);
-  width: 115vw;
+  width: 100vw;
 }
 .artistes-layout {
   display: flex;
@@ -888,7 +888,7 @@ body.on-light .sidewalk-progress {
    ============================================================ */
 .panel--next {
   background: var(--brume);
-  width: 70vw;
+  width: 100vw;
 }
 .next-layout {
   max-width: 700px;
