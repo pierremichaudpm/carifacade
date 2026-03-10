@@ -24,6 +24,10 @@
   let isScrolling = false;
   let rafId = null;
   let hintHidden = false;
+  let isMobile = window.innerWidth <= 1024;
+
+  // --- Light panels (for logo mode) ---
+  const lightPanels = new Set(['panel--vision', 'panel--video', 'panel--budget', 'panel--artistes', 'panel--next']);
 
   // --- Modal data (artists + components + concept) ---
   const modalData = {
@@ -45,19 +49,19 @@
       name: 'Fenêtre — Lieux de vie',
       origin: '',
       desc: 'Cette fenêtre présente des paysages urbains et ruraux du Québec, pour montrer la diversité des milieux où l\'on peut vivre, travailler et s\'ancrer. Elle invite chacun à se projeter dans ces lieux et à imaginer son propre quotidien ici.<br><br><em>Image de Eunki Kim : la façade enneigée</em>',
-      images: ['assets/images/Fenetres/Eunki%20Kim_pic2.jpg']
+      images: ['assets/images/Fenetres/lieuxdevie.jpg']
     },
     nature: {
       name: 'Fenêtre — La nature et les saisons',
       origin: '',
       desc: 'Cette fenêtre ouvre sur la nature québécoise : fleuve, lacs, forêts, faune et flore. Elle rappelle le lien fort entre la population et le territoire, et propose d\'entrer dans la société québécoise par l\'émerveillement et le respect de l\'environnement.<br><br><em>Image dans le style de Khosro Berahmandi (générée par l\'IA)</em>',
-      images: ['assets/images/Fenetres/Pilar_Marcias_Pic1.jpg']
+      images: ['assets/images/Fenetres/natureetsaisons.jpg']
     },
     habitants: {
       name: 'Fenêtre — Les habitants et les langues',
       origin: '',
       desc: 'Cette fenêtre met en scène la diversité des cultures qui composent le Québec, avec des images de personnes et le mot « Bienvenue » en plusieurs langues. Elle montre que la société québécoise se construit avec toutes et tous, d\'ici et d\'ailleurs.',
-      images: ['assets/images/Fenetres/marwan%20sekkat_pic1.png']
+      images: ['assets/images/Fenetres/habitants%20et%20langues.jpg']
     },
     services: {
       name: 'Fenêtre — Le CARI St‑Laurent',
@@ -120,11 +124,72 @@
   // INIT
   // ============================================================
   function init() {
+    if (isMobile) {
+      initMobile();
+      return;
+    }
     calcMaxScroll();
     buildProgressLabels();
     resizeCanvas();
     bindEvents();
     animate();
+  }
+
+  function initMobile() {
+    // Vertical scroll mode — no custom scroll engine
+    // Reveal elements via IntersectionObserver
+    const revealTargets = document.querySelectorAll('[data-reveal], .component-card, .next-steps li');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach(el => observer.observe(el));
+
+    // Logo mode on scroll
+    window.addEventListener('scroll', updateLogoModeMobile, { passive: true });
+    updateLogoModeMobile();
+
+    // Modal triggers — same delegation
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-open-modal]');
+      if (trigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        openModal(trigger.dataset.openModal);
+      }
+    });
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Logo click → scroll to top
+    const logoHome = document.getElementById('logoHome');
+    if (logoHome) {
+      logoHome.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+
+  function updateLogoModeMobile() {
+    const logoY = 80;
+    for (const p of panels) {
+      const rect = p.getBoundingClientRect();
+      if (rect.top <= logoY && rect.bottom > logoY) {
+        const isLight = Array.from(p.classList).some(c => lightPanels.has(c));
+        document.body.classList.toggle('on-light', isLight);
+        break;
+      }
+    }
   }
 
   function calcMaxScroll() {
@@ -241,8 +306,6 @@
   // ============================================================
   // LOGO MODE — white on dark, color on light
   // ============================================================
-  const lightPanels = new Set(['panel--vision', 'panel--video', 'panel--budget', 'panel--artistes', 'panel--next']);
-
   function updateLogoMode() {
     // Find which panel is under the logo (top-left area)
     let cumX = 0;
@@ -400,6 +463,17 @@
     window.addEventListener('touchmove', onTouchMove, { passive: false });
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('resize', () => {
+      const wasMobile = isMobile;
+      isMobile = window.innerWidth <= 1024;
+      if (isMobile && !wasMobile) {
+        // Switched to mobile — reload to re-init cleanly
+        location.reload();
+        return;
+      }
+      if (!isMobile && wasMobile) {
+        location.reload();
+        return;
+      }
       calcMaxScroll();
       resizeCanvas();
     });

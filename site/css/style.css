@@ -1127,30 +1127,242 @@ body.on-light .sidewalk-progress {
 }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE — VERTICAL MODE (≤1024px)
    ============================================================ */
 @media (max-width: 1024px) {
-  .panel__inner { padding: 3rem; }
-  .hero-split { grid-template-columns: 1fr; }
-  .hero-split__image { display: none; }
-  .hero-split__text { padding: 3rem; }
-  .vision-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .components-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .video-layout__grid { grid-template-columns: 1fr; }
-  .tech-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .budget-content { grid-template-columns: 1fr; }
-  .funding-layout { grid-template-columns: 1fr; gap: 2rem; }
-  .panel--artistes { width: 200vw; }
-  .artistes-grid { grid-template-columns: repeat(4, 1fr); }
+  /* --- Switch to vertical scroll --- */
+  html {
+    overflow: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+  body {
+    overflow: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+  .track {
+    flex-direction: column;
+    width: 100% !important;
+    height: auto;
+    transform: none !important;
+  }
+  .panel {
+    width: 100% !important;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .panel__inner {
+    padding: 3rem 2.5rem;
+    padding-top: 6rem;
+    height: auto;
+    min-height: 0;
+  }
+
+  /* --- Hide horizontal-only UI --- */
+  .sidewalk-progress { display: none; }
+  .scroll-hint { display: none; }
+  .weave-canvas { display: none; }
+
+  /* --- Logo smaller --- */
+  .floating-logo {
+    height: 80px;
+    top: 0.8rem;
+    left: 1.5rem;
+  }
+  .floating-logo img {
+    height: 80px;
+  }
+
+  /* --- Hero --- */
+  .hero-split {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .hero-split__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-split__image-overlay {
+    background: linear-gradient(to top, var(--bleu) 20%, rgba(38,49,100,0.7) 60%, rgba(38,49,100,0.4) 100%);
+  }
+  .hero-split__text {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 2.5rem 3rem;
+    justify-content: flex-end;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .panel--hero .panel__inner {
+    padding: 0;
+  }
+  .hero-split__line {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+  .hero-split__sub {
+    font-size: 1.2rem;
+  }
+
+  /* --- Vision --- */
+  .vision-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .vision-lead { font-size: 1.4rem; }
+  .vision-point p { font-size: 1.15rem; }
+
+  /* --- Concept --- */
+  .components-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  /* --- Video --- */
+  .video-layout__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Fenêtres du Québec --- */
+  .portes-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .portes-layout__header {
+    flex: none;
+    width: 100%;
+  }
+  .portes-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-height: none;
+    width: 100%;
+  }
+
+  /* --- Artistes --- */
+  .artistes-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+
+  /* --- Tech --- */
+  .tech-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* --- Budget --- */
+  .budget-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* --- Financement --- */
+  .funding-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* --- Prochaines étapes --- */
+  .panel--next {
+    min-height: auto;
+  }
+  .next-cta__logos img {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  /* --- Modal --- */
+  .modal {
+    width: 95vw;
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+
+  /* --- Section numbers --- */
+  .section-number { font-size: 4.5rem; }
 }
 
+/* ============================================================
+   RESPONSIVE — PHONE (≤768px)
+   ============================================================ */
 @media (max-width: 768px) {
-  .panel__inner { padding: 2rem 1.5rem; }
-  .section-number { font-size: 4rem; }
-  .artistes-grid { grid-template-columns: repeat(2, 1fr); }
-  .panel--artistes { width: 200vw; }
+  .panel__inner {
+    padding: 2rem 1.25rem;
+    padding-top: 5rem;
+  }
+
+  /* --- Logo --- */
+  .floating-logo {
+    height: 56px;
+    top: 0.6rem;
+    left: 1rem;
+  }
+  .floating-logo img { height: 56px; }
+
+  /* --- Hero --- */
+  .hero-split__text {
+    padding: 5rem 1.25rem 2.5rem;
+  }
+  .hero-split__line {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+  .hero-split__sub { font-size: 1.05rem; }
+  .hero-split__tag { font-size: 0.75rem; margin-bottom: 1.5rem; }
+
+  /* --- Section titles --- */
+  .section-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+  .section-number { font-size: 3.5rem; }
+
+  /* --- Concept: single column --- */
+  .components-grid { grid-template-columns: 1fr; }
+  .component-card__title { font-size: 1.4rem; }
+  .component-card__text { font-size: 1.05rem; }
+
+  /* --- Fenêtres: 2 columns --- */
+  .portes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .portes-layout__sub { font-size: 1rem; }
+
+  /* --- Artistes: 2 columns --- */
+  .artistes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* --- Vision --- */
+  .vision-lead { font-size: 1.2rem; }
+  .vision-point p { font-size: 1.05rem; }
+
+  /* --- Tech --- */
+  .tech-item h3 { font-size: 1.25rem; }
+  .tech-item p { font-size: 1rem; }
+  .tech-evolution h3 { font-size: 1.25rem; }
+  .tech-evolution p { font-size: 1rem; }
+
+  /* --- Budget --- */
+  .phase-block__label { font-size: 1.2rem; }
+  .phase-block p { font-size: 1rem; }
+  .budget-table { padding: 1.5rem; }
+  .budget-row__label { font-size: 0.95rem; }
+  .budget-row__range { font-size: 0.95rem; }
+
+  /* --- Financement --- */
+  .funding-tag { padding: 0.5rem 1rem; font-size: 0.9rem; }
+  .retombee-item strong { font-size: 1rem; }
+  .retombee-item p { font-size: 0.9rem; }
+
+  /* --- Modal --- */
+  .modal { border-radius: 14px; }
+  .modal__content { padding: 1.5rem; }
   .modal__gallery { grid-template-columns: 1fr; }
-  .floating-logo img { height: 24px; }
-  .sidewalk-progress__labels { display: none; }
-  .portes-grid { grid-template-columns: repeat(3, 1fr); }
+  .modal__artist-header h2 { font-size: 1.5rem; }
+
+  /* --- Next --- */
+  .next-steps li { font-size: 1rem; }
+  .next-cta__logos img { max-width: 300px; }
 }
