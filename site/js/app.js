@@ -310,11 +310,16 @@
     // Find which panel is under the logo (top-left area)
     let cumX = 0;
     const logoX = currentX + 100; // roughly where logo sits
+    const logoEl = document.getElementById('logoHome');
     for (const p of panels) {
       cumX += p.offsetWidth;
       if (cumX > logoX) {
         const isLight = Array.from(p.classList).some(c => lightPanels.has(c));
         document.body.classList.toggle('on-light', isLight);
+        // Hide floating logo on panel--next (has its own logo)
+        const hideOnPanel = p.classList.contains('panel--next');
+        logoEl.style.opacity = hideOnPanel ? '0' : '';
+        logoEl.style.pointerEvents = hideOnPanel ? 'none' : '';
         break;
       }
     }
