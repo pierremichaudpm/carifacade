@@ -48,13 +48,13 @@
     lieux: {
       name: 'Fenêtre — Lieux de vie',
       origin: '',
-      desc: 'Cette fenêtre présente des paysages urbains et ruraux du Québec, pour montrer la diversité des milieux où l\'on peut vivre, travailler et s\'ancrer. Elle invite chacun à se projeter dans ces lieux et à imaginer son propre quotidien ici.<br><br><em>Image de Eunki Kim : la façade enneigée</em>',
+      desc: 'Cette fenêtre présente des paysages urbains et ruraux du Québec, pour montrer la diversité des milieux où l\'on peut vivre, travailler et s\'ancrer. Elle invite chacun à se projeter dans ces lieux et à imaginer son propre quotidien ici.',
       images: ['assets/images/Fenetres/lieuxdevie.jpg']
     },
     nature: {
       name: 'Fenêtre — La nature et les saisons',
       origin: '',
-      desc: 'Cette fenêtre ouvre sur la nature québécoise : fleuve, lacs, forêts, faune et flore. Elle rappelle le lien fort entre la population et le territoire, et propose d\'entrer dans la société québécoise par l\'émerveillement et le respect de l\'environnement.<br><br><em>Image dans le style de Khosro Berahmandi (générée par l\'IA)</em>',
+      desc: 'Cette fenêtre ouvre sur la nature québécoise : fleuve, lacs, forêts, faune et flore. Elle rappelle le lien fort entre la population et le territoire, et propose d\'entrer dans la société québécoise par l\'émerveillement et le respect de l\'environnement.',
       images: ['assets/images/Fenetres/natureetsaisons.jpg']
     },
     habitants: {
