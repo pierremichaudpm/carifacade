@@ -68,9 +68,11 @@ strong { font-weight: 600; }
 
 .panel__inner {
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
   height: 100%;
-  padding: clamp(1.5rem, 3vh, 3rem) clamp(2rem, 4vw, 6rem);
-  padding-top: clamp(5rem, 8vh, 10rem);
+  padding: 4rem 6rem;
+  padding-top: 10rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,14 +86,14 @@ strong { font-weight: 600; }
   top: calc(0.4rem - 15px);
   left: 3rem;
   z-index: 100;
-  height: clamp(80px, 8vh, 160px);
+  height: 160px;
   cursor: pointer;
 }
 .floating-logo img {
   position: absolute;
   top: 0;
   left: 0;
-  height: clamp(80px, 8vh, 160px);
+  height: 160px;
   width: auto;
   max-width: none;
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -204,23 +206,23 @@ body.on-light .sidewalk-progress {
 /* --- SECTION NUMBERS --- */
 .section-number {
   font-family: var(--font-sans);
-  font-size: clamp(3rem, 5vh, 6rem);
+  font-size: 6rem;
   font-weight: 900;
   color: var(--turquoise);
   opacity: 0.15;
   line-height: 1;
   display: block;
-  margin-bottom: clamp(0.15rem, 0.5vh, 0.5rem);
+  margin-bottom: 0.5rem;
 }
 .section-number--light { color: var(--brume); opacity: 0.12; }
 
 /* --- SECTION TITLES --- */
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.5vh, 4rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1.15;
   color: var(--bleu);
-  margin-bottom: clamp(0.5rem, 1.5vh, 1.5rem);
+  margin-bottom: 1.5rem;
 }
 .section-title--light { color: var(--blanc); }
 
@@ -240,15 +242,15 @@ body.on-light .sidewalk-progress {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(2rem, 4vh, 4rem) clamp(2rem, 4vw, 4rem) clamp(2rem, 4vh, 4rem) clamp(3rem, 5vw, 6rem);
+  padding: 4rem 4rem 4rem 6rem;
 }
 .hero-split__tag {
-  font-size: clamp(0.7rem, 1vh, 0.9rem);
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--turquoise);
-  margin-bottom: clamp(1rem, 3vh, 2.5rem);
+  margin-bottom: 2.5rem;
 }
 .hero-split__title {
   font-family: var(--font-serif);
@@ -257,20 +259,20 @@ body.on-light .sidewalk-progress {
 }
 .hero-split__line {
   display: block;
-  font-size: clamp(3rem, 6vh, 7rem);
+  font-size: clamp(4rem, 8vw, 7rem);
 }
 .hero-split__line--accent {
   color: var(--turquoise);
   font-style: italic;
 }
 .hero-split__sub {
-  margin-top: clamp(1rem, 2vh, 2rem);
-  font-size: clamp(1rem, 1.6vh, 1.5rem);
+  margin-top: 2rem;
+  font-size: 1.5rem;
   color: rgba(255,255,255,0.6);
   line-height: 1.6;
 }
 .hero-split__thread {
-  margin-top: clamp(1.5rem, 3vh, 3rem);
+  margin-top: 3rem;
   height: 2px;
   width: 80px;
   background: var(--dore);
@@ -320,15 +322,15 @@ body.on-light .sidewalk-progress {
   align-items: center;
 }
 .vision-lead {
-  font-size: clamp(1rem, 1.8vh, 1.75rem);
+  font-size: 1.75rem;
   line-height: 1.5;
   color: var(--bleu);
-  margin-bottom: clamp(0.75rem, 2vh, 2.5rem);
+  margin-bottom: 2.5rem;
 }
 .vision-points {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.5rem, 1.2vh, 1.5rem);
+  gap: 1.5rem;
 }
 .vision-point {
   display: flex;
@@ -356,7 +358,7 @@ body.on-light .sidewalk-progress {
   transform: translate(-50%, -50%);
 }
 .vision-point p {
-  font-size: clamp(0.85rem, 1.4vh, 1.35rem);
+  font-size: 1.35rem;
   color: var(--bleu);
   opacity: 0.8;
   line-height: 1.5;
@@ -381,15 +383,15 @@ body.on-light .sidewalk-progress {
 .components-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1rem, 2vh, 2.5rem);
-  margin-top: clamp(0.25rem, 1vh, 1rem);
+  gap: 2.5rem;
+  margin-top: 1rem;
   max-width: 100%;
 }
 .component-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(108,186,199,0.15);
   border-radius: 16px;
-  padding: clamp(1rem, 2vh, 2.5rem) clamp(1rem, 1.5vw, 2rem);
+  padding: 2.5rem clamp(1rem, 1.5vw, 2rem);
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.5s ease, opacity 0.7s ease, box-shadow 0.5s ease;
   opacity: 0;
   transform: translate3d(0, 40px, 0);
@@ -405,18 +407,18 @@ body.on-light .sidewalk-progress {
   box-shadow: 0 20px 60px rgba(108, 186, 199, 0.15);
 }
 .component-card__icon {
-  width: clamp(40px, 5vh, 80px);
-  height: clamp(40px, 5vh, 80px);
-  margin-bottom: clamp(0.4rem, 1vh, 1.5rem);
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.5rem;
 }
 .component-card__title {
   font-family: var(--font-serif);
-  font-size: clamp(1.1rem, 2vh, 1.8rem);
+  font-size: 1.8rem;
   color: var(--blanc);
-  margin-bottom: clamp(0.25rem, 0.5vh, 0.75rem);
+  margin-bottom: 0.75rem;
 }
 .component-card__text {
-  font-size: clamp(0.8rem, 1.3vh, 1.2rem);
+  font-size: 1.2rem;
   color: rgba(255,255,255,0.7);
   line-height: 1.5;
 }
@@ -426,12 +428,12 @@ body.on-light .sidewalk-progress {
   margin: 1rem 0 0;
 }
 .component-card__details li {
-  font-size: clamp(0.7rem, 1.1vh, 1.05rem);
+  font-size: 1.05rem;
   color: rgba(255,255,255,0.55);
   line-height: 1.4;
   padding-left: 1.2em;
   position: relative;
-  margin-bottom: clamp(0.1rem, 0.3vh, 0.4rem);
+  margin-bottom: 0.4rem;
 }
 .component-card__details li::before {
   content: '—';
@@ -441,11 +443,11 @@ body.on-light .sidewalk-progress {
 }
 .component-card__cta {
   display: inline-block;
-  margin-top: clamp(0.4rem, 1vh, 1.2rem);
-  padding: clamp(0.3rem, 0.5vh, 0.55rem) clamp(0.8rem, 1vw, 1.4rem);
+  margin-top: 1.2rem;
+  padding: 0.55rem clamp(0.8rem, 1vw, 1.4rem);
   background: var(--vermillon);
   color: #fff;
-  font-size: clamp(0.7rem, 1vh, 0.95rem);
+  font-size: 0.95rem;
   font-weight: 600;
   border-radius: 6px;
   letter-spacing: 0.02em;
@@ -701,17 +703,17 @@ body.on-light .sidewalk-progress {
 .tech-layout__right {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.4rem, 1vh, 1.5rem);
+  gap: 1.5rem;
 }
 .tech-item h3 {
   font-family: var(--font-serif);
   color: var(--turquoise);
-  font-size: clamp(0.95rem, 1.6vh, 1.5rem);
-  margin-bottom: clamp(0.1rem, 0.3vh, 0.4rem);
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
 }
 .tech-item p {
   color: rgba(255,255,255,0.65);
-  font-size: clamp(0.8rem, 1.2vh, 1.15rem);
+  font-size: 1.15rem;
   line-height: 1.45;
 }
 .tech-divider {
@@ -722,12 +724,12 @@ body.on-light .sidewalk-progress {
 .tech-evolution h3 {
   font-family: var(--font-serif);
   color: var(--dore);
-  font-size: clamp(0.95rem, 1.6vh, 1.5rem);
-  margin-bottom: clamp(0.1rem, 0.3vh, 0.4rem);
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
 }
 .tech-evolution p {
   color: rgba(255,255,255,0.65);
-  font-size: clamp(0.8rem, 1.2vh, 1.15rem);
+  font-size: 1.15rem;
   line-height: 1.45;
 }
 
@@ -740,7 +742,7 @@ body.on-light .sidewalk-progress {
 .budget-layout {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.75rem, 1.5vh, 2.5rem);
+  gap: 2.5rem;
   height: 100%;
   justify-content: center;
 }
@@ -752,10 +754,10 @@ body.on-light .sidewalk-progress {
 .phases-timeline {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.5rem, 1.2vh, 1.5rem);
+  gap: 1.5rem;
 }
 .phase-block {
-  padding: clamp(0.6rem, 1.2vh, 1.5rem);
+  padding: 1.5rem;
   border-left: 3px solid rgba(38,49,100,0.1);
   transition: border-color 0.3s;
 }
@@ -764,12 +766,12 @@ body.on-light .sidewalk-progress {
 }
 .phase-block__label {
   font-family: var(--font-serif);
-  font-size: clamp(0.95rem, 1.5vh, 1.4rem);
+  font-size: 1.4rem;
   color: var(--bleu);
-  margin-bottom: clamp(0.15rem, 0.4vh, 0.5rem);
+  margin-bottom: 0.5rem;
 }
 .phase-block p {
-  font-size: clamp(0.8rem, 1.2vh, 1.15rem);
+  font-size: 1.15rem;
   color: var(--bleu);
   opacity: 0.6;
   line-height: 1.5;
@@ -777,28 +779,28 @@ body.on-light .sidewalk-progress {
 .budget-table {
   background: var(--bleu);
   border-radius: 16px;
-  padding: clamp(1rem, 2vh, 2rem);
+  padding: 2rem;
 }
 .budget-table h3 {
   font-family: var(--font-serif);
   color: var(--blanc);
-  font-size: clamp(0.95rem, 1.5vh, 1.3rem);
-  margin-bottom: clamp(0.5rem, 1.2vh, 1.5rem);
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
 }
 .budget-row {
   display: flex;
   justify-content: space-between;
-  padding: clamp(0.4rem, 0.8vh, 0.9rem) 0;
+  padding: 0.9rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .budget-row__label {
   color: rgba(255,255,255,0.6);
-  font-size: clamp(0.75rem, 1.1vh, 1.05rem);
+  font-size: 1.05rem;
 }
 .budget-row__range {
   color: var(--turquoise);
   font-weight: 600;
-  font-size: clamp(0.75rem, 1.1vh, 1.05rem);
+  font-size: 1.05rem;
 }
 .budget-row--total {
   border-bottom: none;
@@ -812,7 +814,7 @@ body.on-light .sidewalk-progress {
 }
 .budget-row--total .budget-row__range {
   color: var(--dore);
-  font-size: clamp(0.85rem, 1.3vh, 1.2rem);
+  font-size: 1.2rem;
 }
 
 /* ============================================================
@@ -831,8 +833,8 @@ body.on-light .sidewalk-progress {
 .retombees h3 {
   font-family: var(--font-serif);
   color: var(--turquoise);
-  font-size: clamp(1rem, 1.6vh, 1.5rem);
-  margin-bottom: clamp(0.5rem, 1vh, 1.25rem);
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 .funding-tag-group {
   display: flex;
@@ -841,11 +843,11 @@ body.on-light .sidewalk-progress {
 }
 .funding-tag {
   display: inline-block;
-  padding: clamp(0.35rem, 0.7vh, 0.7rem) clamp(0.7rem, 1vw, 1.4rem);
+  padding: 0.7rem clamp(0.7rem, 1vw, 1.4rem);
   border-radius: 50px;
   border: 1px solid rgba(108,186,199,0.3);
   color: var(--brume);
-  font-size: clamp(0.75rem, 1.1vh, 1.05rem);
+  font-size: 1.05rem;
   font-weight: 500;
   transition: border-color 0.2s, background 0.2s;
 }
@@ -865,7 +867,7 @@ body.on-light .sidewalk-progress {
 }
 .retombee-item__number {
   font-family: var(--font-serif);
-  font-size: clamp(1rem, 1.5vh, 1.5rem);
+  font-size: 1.5rem;
   color: var(--dore);
   flex-shrink: 0;
   width: 2rem;
@@ -873,13 +875,13 @@ body.on-light .sidewalk-progress {
 }
 .retombee-item strong {
   color: var(--blanc);
-  font-size: clamp(0.8rem, 1.2vh, 1.15rem);
+  font-size: 1.15rem;
   display: block;
   margin-bottom: 0.1rem;
 }
 .retombee-item p {
   color: rgba(255,255,255,0.6);
-  font-size: clamp(0.7rem, 1.1vh, 1.05rem);
+  font-size: 1.05rem;
   line-height: 1.4;
 }
 
@@ -898,15 +900,15 @@ body.on-light .sidewalk-progress {
   counter-reset: step;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.4rem, 1vh, 1.25rem);
-  margin-bottom: clamp(0.75rem, 2vh, 3rem);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
 }
 .next-steps li {
   counter-increment: step;
   display: flex;
   align-items: flex-start;
   gap: clamp(0.5rem, 0.8vw, 1rem);
-  font-size: clamp(0.8rem, 1.3vh, 1.15rem);
+  font-size: 1.15rem;
   color: var(--bleu);
   opacity: 0;
   transform: translateX(20px);
@@ -923,24 +925,24 @@ body.on-light .sidewalk-progress {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(22px, 3vh, 32px);
-  height: clamp(22px, 3vh, 32px);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--turquoise);
   color: var(--blanc);
-  font-size: clamp(0.65rem, 1vh, 0.85rem);
+  font-size: 0.85rem;
   font-weight: 700;
 }
 .next-cta {
-  margin-top: clamp(0.25rem, 0.5vh, 1rem);
-  padding-top: clamp(0.5rem, 1.5vh, 2rem);
+  margin-top: 1rem;
+  padding-top: 2rem;
   border-top: 1px solid rgba(38,49,100,0.1);
 }
 .next-cta__text {
-  font-size: clamp(0.75rem, 1.1vh, 0.95rem);
+  font-size: 0.95rem;
   color: var(--bleu);
   opacity: 0.6;
-  margin-bottom: clamp(0.5rem, 1.5vh, 1.5rem);
+  margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 .next-cta__logos img {
@@ -1133,6 +1135,87 @@ body.on-light .sidewalk-progress {
 [data-reveal].is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+/* ============================================================
+   RESPONSIVE — SHORT DESKTOP (viewport height ≤ 800px)
+   Reduces sizes so content fits in 100vh on laptops
+   ============================================================ */
+@media (max-height: 800px) and (min-width: 1025px) {
+  .panel__inner {
+    padding: 2rem 4rem;
+    padding-top: 6rem;
+  }
+  .floating-logo { height: 90px; }
+  .floating-logo img { height: 90px; }
+
+  .section-number { font-size: 3.5rem; margin-bottom: 0.25rem; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.75rem; }
+
+  /* Hero */
+  .hero-split__text { padding: 2rem 3rem 2rem 4rem; }
+  .hero-split__tag { font-size: 0.75rem; margin-bottom: 1.5rem; }
+  .hero-split__line { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+  .hero-split__sub { font-size: 1.1rem; margin-top: 1rem; }
+  .hero-split__thread { margin-top: 1.5rem; }
+
+  /* Vision */
+  .vision-lead { font-size: 1.2rem; margin-bottom: 1rem; }
+  .vision-points { gap: 0.75rem; }
+  .vision-point p { font-size: 1rem; }
+
+  /* Concept */
+  .components-grid { gap: 1.25rem; margin-top: 0.5rem; }
+  .component-card { padding: 1.25rem 1.25rem; }
+  .component-card__icon { width: 48px; height: 48px; margin-bottom: 0.5rem; }
+  .component-card__title { font-size: 1.25rem; margin-bottom: 0.35rem; }
+  .component-card__text { font-size: 0.9rem; }
+  .component-card__details { margin: 0.5rem 0 0; }
+  .component-card__details li { font-size: 0.8rem; margin-bottom: 0.15rem; }
+  .component-card__cta { margin-top: 0.6rem; padding: 0.35rem 1rem; font-size: 0.8rem; }
+
+  /* Video */
+  .video-layout { gap: 1.5rem; }
+
+  /* Tech */
+  .tech-layout { gap: 2rem; }
+  .tech-layout__right { gap: 0.6rem; }
+  .tech-item h3 { font-size: 1.1rem; margin-bottom: 0.15rem; }
+  .tech-item p { font-size: 0.88rem; line-height: 1.4; }
+  .tech-evolution h3 { font-size: 1.1rem; margin-bottom: 0.15rem; }
+  .tech-evolution p { font-size: 0.88rem; line-height: 1.4; }
+  .tech-divider { margin: 0.25rem 0; }
+
+  /* Budget */
+  .budget-layout { gap: 1.25rem; }
+  .budget-content { gap: 2rem; }
+  .phases-timeline { gap: 0.75rem; }
+  .phase-block { padding: 0.75rem; }
+  .phase-block__label { font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .phase-block p { font-size: 0.9rem; }
+  .budget-table { padding: 1.25rem; }
+  .budget-table h3 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+  .budget-row { padding: 0.5rem 0; }
+  .budget-row__label { font-size: 0.88rem; }
+  .budget-row__range { font-size: 0.88rem; }
+  .budget-row--total .budget-row__range { font-size: 1rem; }
+
+  /* Financement */
+  .funding-layout { gap: 2rem; }
+  .funding-sources h3, .retombees h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .funding-tag { padding: 0.45rem 1rem; font-size: 0.88rem; }
+  .retombees { gap: 0.75rem; }
+  .retombee-item__number { font-size: 1.2rem; }
+  .retombee-item strong { font-size: 0.95rem; }
+  .retombee-item p { font-size: 0.85rem; }
+
+  /* Next */
+  .next-steps { gap: 0.6rem; margin-bottom: 1.5rem; }
+  .next-steps li { font-size: 0.95rem; }
+  .next-steps li::before { width: 26px; height: 26px; font-size: 0.75rem; }
+  .next-cta { margin-top: 0.5rem; padding-top: 1rem; }
+  .next-cta__text { font-size: 0.8rem; margin-bottom: 0.75rem; }
+  .next-cta__logos img { width: 400px; }
 }
 
 /* ============================================================
