@@ -133,26 +133,35 @@ body.on-light .floating-logo__color {
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 1rem;
   pointer-events: none;
 }
 .sidewalk-progress__label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  transition: color 0.3s, transform 0.3s;
+  color: rgba(255,255,255,0.35);
+  transition: color 0.4s, transform 0.4s, opacity 0.4s;
   cursor: pointer;
   pointer-events: auto;
+  white-space: nowrap;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
 }
 .sidewalk-progress__label.is-active {
   color: var(--dore);
   transform: translateY(-2px);
+  font-weight: 700;
+  opacity: 1;
 }
 /* On light sections, darken progress labels */
 body.on-light .sidewalk-progress__label {
-  color: rgba(38,49,100,0.5);
+  color: rgba(38,49,100,0.3);
 }
 body.on-light .sidewalk-progress__label.is-active {
   color: var(--vermillon);
