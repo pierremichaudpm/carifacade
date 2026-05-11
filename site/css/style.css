@@ -539,6 +539,7 @@ body.on-light .sidewalk-progress {
   will-change: transform;
   opacity: 0;
   transform: translate3d(0, 20px, 0);
+  cursor: pointer;
 }
 .porte-card.is-visible {
   opacity: 1;
@@ -564,35 +565,10 @@ body.on-light .sidewalk-progress {
 .porte-card__info {
   padding: 0.75rem 1rem;
 }
-.porte-card {
-  cursor: pointer;
-}
 .porte-card__info h3 {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   color: var(--blanc);
-}
-.porte-card__desc {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.45;
-  margin-top: 0.3rem;
-}
-.porte-card__more {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.4rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--vermillon);
-  border-radius: 5px;
-  letter-spacing: 0.03em;
-  transition: background 0.2s, transform 0.2s;
-}
-.porte-card:hover .porte-card__more {
-  background: #ff7a5c;
-  transform: translateY(-1px);
 }
 
 /* ============================================================
@@ -1076,39 +1052,6 @@ body.on-light .sidewalk-progress {
   width: 64px;
   height: 64px;
 }
-.modal__video-player {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(0,0,0,0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal__video-player-inner {
-  position: relative;
-  width: 80vw;
-  max-width: 900px;
-  aspect-ratio: 16/9;
-}
-.modal__video-player-inner iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-.modal__video-close {
-  position: absolute;
-  top: -2.5rem;
-  right: 0;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  line-height: 1;
-}
-
 /* ============================================================
    WEAVE CANVAS (decorative threads)
    ============================================================ */
