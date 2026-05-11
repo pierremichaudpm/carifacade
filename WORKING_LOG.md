@@ -310,3 +310,88 @@
 2. **Accessibilité modales** — focus trap, rôles ARIA
 3. **Validation manuelle sur écran client** — les screenshots Puppeteer couvrent les viewports standards, mais une validation IRL reste utile avant la prochaine présentation
 4. **Vidéos Google Drive** — confirmer que le partage est bien "Toute personne disposant du lien" pour les 2 vidéos du panel 03
+
+---
+
+## Session 2026-05-11 (suite — après-midi)
+
+### Accompli
+
+#### Panel 03 (Vidéos) — passage de 2 vidéos Drive iframe à 4 vidéos self-hosted
+Évolution en 3 phases au cours de la session :
+
+**Phase 1 — Passage de 2 à 4 vidéos Drive iframe** :
+- Remplacé 2 anciens IDs Drive par 4 nouveaux (façades CARI St-Laurent : plan large + plan rapproché × jour/nuit)
+- Mapping IDs ↔ noms de fichiers déduit de l'ordre alphabétique du dossier Drive du client
+- Grille passée de 1×2 à 2×2 → CSS `.video-layout__grid { max-width: 82vh; margin: 0 auto }` pour que ça tienne sans overflow à 1366×768
+- Légendes finales : « Façade — Plan large, jour/nuit » + « Façade — Plan rapproché, jour/nuit »
+
+**Phase 2 — Ajout d'une modale plein écran au clic** :
+- Variante `modal--video` ajoutée à la modale existante : fond transparent, taille fit-to-iframe (`width: min(85vw, calc(85vh * 16/9))`), X repositionné au-dessus de la vidéo
+- 4 entrées `modalData` initialement avec `videoOnly: 'drive-url'` → short-circuit dans `openModal` qui rend juste un iframe sans header/galerie
+- CSS `.video-block iframe { pointer-events: none }` + `cursor: pointer` sur `.video-block` → l'iframe Drive devient un "preview" inerte, les clics vont à la div parente
+- Smoke test Puppeteer : ✅ click ouvre modale / ✅ X ferme / ✅ backdrop ferme / ✅ ESC ferme / ✅ iframe vidé à la fermeture
+
+**Phase 3 — Migration vers self-hosted .mp4 (à cause de l'autoplay)** :
+- Le client voulait l'autoplay → tentatives infructueuses avec `?autoplay=1`, `?autoplay=1&mute=1`, iframe `focus()` au load → Drive n'honore aucun paramètre d'autoplay de façon fiable
+- Décision : migrer vers HTML5 `<video>` self-hosted (autoplay 100% fiable car déclenché par clic user)
+- Téléchargement des 4 fichiers Drive en CLI via `curl` (déjà publics côté partage)
+- Le fichier 105 Mo a déclenché l'interstitiel virus-scan de Drive → parsing du HTML pour extraire `confirm=t&uuid=…` et resoumettre sur `drive.usercontent.google.com/download`
+- Ré-encodage des 4 vidéos : H.264 CRF 24, 1080p max (downscale du 4K), `-an` (aucune piste audio dans les sources), `-movflags +faststart`
+- Résultat compression : 192 Mo → **3.9 Mo** (ratio 50:1 grâce au contenu majoritairement statique)
+- Posters extraits à `00:00:01` via ffmpeg → 1 Mo de JPGs
+- Grille passe d'iframes Drive à `<img class="video-block__poster">` + overlay SVG `<svg class="video-block__play">` (cercle + triangle play, hover scale 1.1)
+- Modale passe à `<video src="..." autoplay controls playsinline preload="auto">` → autoplay garanti, contrôles natifs HTML5
+- `modalData` simplifié : `{ videoFile: 'assets/videos/X.mp4' }` au lieu de `{ videoOnly: 'drive-url' }`
+- `closeModal()` étendu pour pause + reset des `<video>` en plus de vider les iframes
+
+#### Volume travail
+- 3 commits : nettoyage CSS+responsive (matin), self-hosted vidéos (après-midi), docs (ce commit-ci)
+- ~5 Mo ajoutés au repo (4 mp4 + 4 jpg posters), volume largement acceptable pour Netlify
+
+### Décisions techniques
+
+| Décision | Raison |
+|----------|--------|
+| Self-hosting des vidéos plutôt que Drive iframe | L'autoplay Drive est non documenté et non fiable. HTML5 `<video autoplay>` après clic user marche partout. |
+| Encoding H.264 CRF 24 (pas CRF 18 ou 28) | Compromis qualité/poids visuellement testé OK sur des frames sampled. Le contenu façade-statique compresse extrêmement bien. |
+| Suppression de la piste audio (`-an`) | Les sources Drive n'avaient déjà aucune piste audio (façades = visuel pur). Économie de quelques % de poids et simplification autoplay (pas de problème de browser-mute policy). |
+| Poster `.jpg` (pas `.webp`) | Compatibilité universelle, taille acceptable (~250 Ko), pas de pipeline d'optim WebP nécessaire pour 4 images. |
+| Grille = poster statique + icône play, modale = autoplay | Choix client (option présentée parmi : boucle muette / poster+play / contrôles visibles). Le poster + play est l'option « cinéma » la plus présentation-friendly. |
+| `max-width: 82vh` sur `.video-layout__grid` | Calcul tenant compte de header + captions + menu progress sur 1366×768. À 92vh ça touchait le menu progress ; à 82vh il y a ~45 px de marge. |
+| Téléchargement CLI plutôt que demander à l'utilisateur de download manuellement | Les fichiers Drive étaient déjà publics → `curl` direct possible. Workflow plus rapide pour le user. |
+
+### Problèmes rencontrés
+
+1. **Drive ne supporte pas l'autoplay fiable** : `?autoplay=1`, `?autoplay=1&mute=1`, `?autoplay=true`, focus iframe au load → aucun n'a marché. La doc Drive officielle n'expose pas de paramètre autoplay sur `/preview`. Les rapports communautaires sont incohérents (marche sur certains comptes/régions, pas d'autres). Conclusion : pour de l'autoplay fiable, ne pas dépendre de Drive — héberger localement.
+
+2. **Drive virus-scan pour fichiers > 100 Mo** : `curl -L "https://drive.google.com/uc?export=download&id=ID"` retourne ~2.4 Ko de HTML (l'interstitiel de scan) au lieu du fichier. Fix : parser le HTML pour extraire les hidden form fields `confirm=t&uuid=XXX`, puis re-curl sur `https://drive.usercontent.google.com/download?id=...&export=download&confirm=t&uuid=XXX`.
+
+3. **Mapping IDs↔fichiers Drive opaque** : Le client a envoyé 4 IDs Drive sans préciser le mapping avec les noms de fichiers (`FACADE_JOUR`, `FACADE_NIGHT`, `FACADE_CLOSE-UP_JOUR`, `FACADE_CLOSE-UP_NIGHT`). Hypothèse : IDs donnés dans l'ordre alphabétique du dossier Drive (confirmé par l'utilisateur après coup).
+
+4. **Overflow grille 2×2 à 1366×768** : Première version sans `max-width` débordait de 137 px. Calculé `max-width: 105vh` → toujours 15 px d'overflow. Puis `92vh` → tenait juste, mais les captions chevauchaient le menu progress. Final : `82vh` → 45 px de marge.
+
+5. **Iframe Drive capte les clics** : Solution `pointer-events: none` sur l'iframe pour que les clics aillent à la div parente `.video-block`. Pas un problème avec la solution finale `<video>` (qui n'a plus besoin de cette astuce car les clics sur l'icône play overlay sont gérés par le SVG en `pointer-events: none` aussi, et le poster image n'a pas de comportement bloquant).
+
+6. **Auto-reset de la modale à la fermeture** : Le `closeModal()` existant ne vidait que les iframes. Pour HTML5 video, ajouter `v.pause(); v.currentTime = 0;` sinon la vidéo continue à jouer en background quand la modale se ferme.
+
+### Prochaines étapes (par priorité)
+
+1. **Validation client en présentation** — voir si l'autoplay HTML5 marche bien sur tous les setups où la présentation sera faite (probablement un ordi + projecteur)
+2. **Optionnel : revenir au partage Drive « Restreint »** — le site ne dépend plus de Drive, donc les 4 fichiers peuvent être reverted en privé si souhaité
+3. **Performance** — toujours pas d'optim sur les autres images (artistes, fenêtres). Pas de srcset, pas de WebP. Reste à faire si on veut un score Lighthouse propre.
+4. **Accessibilité modales** — focus trap, ARIA roles (toujours pas fait)
+5. **Hygiène repo** — `node_modules/` (re-installé pour Puppeteer en session du matin) toujours présent localement, n'est plus dans le repo (gitignore OK), mais pourrait être supprimé une fois Puppeteer plus utilisé
+6. **Nettoyer les 6 entrées `??` à la racine** — `Doc_Brief.docx`, dossiers `Artistes-…`, `animation-…`, `FONTAINE SONORE-…`, `images portes du monde-…`, `cari_facade_photo copy.jpg` : matériel source du client, à ranger ou .gitignore'r définitivement
+
+### Contexte technique pour reprise
+
+- **Cache-buster CSS et JS** : `?v=20260511g` (CSS et JS bumpés tous les deux en phase 3)
+- **Modal.data** : 2 formats coexistent — `{ name, origin, desc, images[], video?, videoReel? }` (artistes/fenêtres/concept) ET `{ videoFile: '...' }` (panel 03). `openModal` branche sur la présence de `videoFile` en premier.
+- **Vidéos sources** : 4 fichiers .mp4 1080p H.264 sans audio dans `site/assets/videos/`, ~3.9 Mo total
+- **Posters** : 4 fichiers .jpg dans le même dossier, ~1 Mo total
+- **Re-encode template** pour ajouter d'autres vidéos plus tard :
+  ```bash
+  ffmpeg -i in.mp4 -vf "scale='min(1920,iw)':-2" -c:v libx264 -preset medium -crf 24 -pix_fmt yuv420p -an -movflags +faststart out.mp4
+  ffmpeg -i in.mp4 -ss 00:00:01 -vframes 1 -q:v 4 poster.jpg
+  ```

@@ -12,6 +12,9 @@ CARI_facade/
 │   ├── js/app.js            # Tout le JS (IIFE, pas de bundler)
 │   └── assets/
 │       ├── brand/           # logo-blanc.png, logo-couleur.png, symbole.png
+│       ├── videos/          # 4 .mp4 + 4 .jpg posters (self-hosted, panel 03)
+│       │                    #   plan-large-{jour,nuit}.{mp4,jpg}
+│       │                    #   plan-rapproche-{jour,nuit}.{mp4,jpg}
 │       └── images/
 │           ├── artistes/    # pilar/ (3), eunki/ (4), marwan/ (3), khosro/ (3)
 │           ├── Fenetres/    # Images pour les 4 cartes Fenêtres du Québec
@@ -52,16 +55,18 @@ CARI_facade/
 - `track.style.transform = translate3d(-currentX, 0, 0)`
 
 ### Système de modales
-- `data-open-modal="key"` sur les éléments cliquables (cartes artistes, fenêtres, concept)
+- `data-open-modal="key"` sur les éléments cliquables (cartes artistes, fenêtres, concept, vidéos)
 - `onclick="openModal('key')"` inline en backup
 - Event delegation sur `document` avec `e.target.closest('[data-open-modal]')`
-- `modalData[key]` : `{ name, origin, desc, images[], video?, videoReel? }`
-- Galerie affichée seulement si `images.length > 0` ou `video` défini
-- Vidéo en vignette (4e item galerie) : clic → iframe inline remplace la vignette
+- **Deux modes de rendu** dans `openModal(key)` :
+  1. **Standard** (artistes/fenêtres/concept) : `modalData[key] = { name, origin, desc, images[], video?, videoReel? }` → header + galerie d'images
+  2. **Vidéo plein écran** (panel 03) : `modalData[key] = { videoFile: 'assets/videos/X.mp4' }` → short-circuit, ajoute classe `modal--video` sur `.modal`, rend `<video autoplay controls playsinline>` seul
+- Galerie : affichée si `images.length > 0` ou `video` défini ; vidéo en vignette (4e item) → clic remplace par iframe inline
 - `videoReel: true` → vignette en 9:16 avec `grid-row: span 2`
 - `desc` peut contenir du HTML (h3, ul, li) — rendu via `innerHTML` dans un `<div class="modal__desc">`
 - `origin` vide → le `<span>` est omis
 - `onWheel` ignoré quand modale ouverte → scroll natif de la modale fonctionne
+- `closeModal()` pause + reset `<video>` (currentTime=0) en plus de vider les `<iframe>` src
 
 ### Logo dual-mode
 - `body.on-light` toggle basé sur le panel sous le logo
@@ -95,19 +100,22 @@ CARI_facade/
 
 ## Contraintes connues
 
-1. **Cache navigateur agressif** : toujours utiliser cache-busters (`?v=YYYYMMDD`) sur les refs CSS/JS dans index.html quand on modifie ces fichiers. Actuellement `?v=20260310j`.
+1. **Cache navigateur agressif** : toujours utiliser cache-busters (`?v=YYYYMMDD<lettre>`) sur les refs CSS/JS dans index.html quand on modifie ces fichiers. Actuellement `?v=20260511g`.
 2. **`data-open-modal` doit être sur l'élément cliquable ENTIER** (la carte div), pas sur un petit bouton à l'intérieur. L'utilisateur s'attend à cliquer n'importe où sur la carte.
 3. **Puppeteer pour debug** : quand un truc "devrait marcher" mais ne marche pas, lancer un test Puppeteer headless (`cd site && node -e '...'`) pour vérifier computed styles, `elementFromPoint`, et simuler des clics réels. Installé dans `site/node_modules/`.
 4. **`[data-reveal]` = opacity:0** par défaut. Les éléments ne deviennent visibles (opacity:1) que quand `is-visible` est ajouté par `revealElements()` dans la boucle d'animation. Ne pas oublier ça lors du debug.
 5. **Stacking context** : track a `will-change: transform` (crée un stacking context), mais la modale est EN DEHORS du track (sibling), donc `position: fixed; z-index: 1000` fonctionne correctement.
 6. **Wayland (Fedora 43 + GNOME)** : pas de xclip, utiliser wl-copy. Pas de `Alt+F2 → r` pour refresh shell.
 7. **Scroll modale** : `onWheel` doit vérifier `modalOverlay.classList.contains('is-open')` et `return` pour laisser le scroll natif de la modale fonctionner.
-8. **Vidéos embed** : Google Drive → `/file/d/ID/preview`, Vimeo → `player.vimeo.com/video/ID`, YouTube → `youtube.com/embed/ID`, Facebook reel → `facebook.com/plugins/video.php` avec `height > width` pour format vertical.
+8. **Vidéos embed** (artistes/concept) : Google Drive → `/file/d/ID/preview`, Vimeo → `player.vimeo.com/video/ID`, YouTube → `youtube.com/embed/ID`, Facebook reel → `facebook.com/plugins/video.php` avec `height > width` pour format vertical.
+8b. **Vidéos panel 03 (Façade)** : self-hosted `<video>` natifs dans `site/assets/videos/`, **PAS** d'iframe Drive. Drive ne supporte pas l'autoplay de façon fiable via paramètre URL → on a migré vers HTML5 `<video autoplay controls playsinline>` pour autoplay garanti dans la modale. Encoding : H.264 CRF 24 1080p sans audio, ~600 kbps (contenu majoritairement statique = très bonne compression). Re-encode template : `ffmpeg -i in.mp4 -vf "scale='min(1920,iw)':-2" -c:v libx264 -preset medium -crf 24 -pix_fmt yuv420p -an -movflags +faststart out.mp4`. Posters extraits à `00:00:01`.
 9. **Noms de fichiers avec espaces** : utiliser `%20` dans les src HTML/JS (ex: `Eunki%20Kim_pic2.jpg`).
 10. **Responsive desktop — ne PAS utiliser `vh` pour les fonts** : `clamp()` avec `vh` produit du texte minuscule sur les grands écrans Retina/HiDPI (viewport CSS ~800px même sur 4K). Approche correcte : valeurs `rem` fixes pour le desktop standard + `@media (max-height: 950px) and (min-width: 1025px)` pour les petits écrans laptop.
 11. **Tous les panels doivent être 100vw** : les largeurs variables (85vw, 115vw, 70vw) causaient du « bleeding » de contenu des panels adjacents. Corrigé en mettant tous les panels à 100vw.
 12. **Logo flottant masqué sur panel--next** : `updateLogoMode()` dans app.js met `opacity: 0` sur le logo quand le panel sous le logo est `panel--next`, car ce panel a déjà son propre logo CARI.
 13. **Progress labels (menu du bas)** : taille 0.72rem, opacité inactive 0.45 (blanc) / 0.4 (bleu). Ne pas trop agrandir — 10 labels doivent tenir sur une ligne sans débordement.
+14. **Grille panel 03 (Vidéos)** : `.video-layout__grid { max-width: 82vh }` pour que la 2×2 de 16:9 tienne sans déborder verticalement à 1366×768. Calcul : 2 rangées de vidéos demi-largeur = grid_width * 9/16 de hauteur ; pour rester sous ~60vh, grid_width ≤ ~107vh — `82vh` laisse de la marge pour le header + les captions + le menu progress.
+15. **Téléchargement Drive en CLI** : `curl -L "https://drive.google.com/uc?export=download&id=ID" -o file.mp4`. Pour fichiers > 100 Mo, parser le HTML de virus-scan pour extraire `confirm=t&uuid=XXX` et resoumettre sur `drive.usercontent.google.com/download`.
 
 ## Contexte global
 Voir ~/Documents/CONTEXT.md pour le profil complet,
