@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260511a">
+  <link rel="stylesheet" href="css/style.css?v=20260511g">
 </head>
 <body>
 
@@ -143,13 +143,25 @@
             <h2 class="section-title">L'expérience<br>en mouvement</h2>
           </div>
           <div class="video-layout__grid">
-            <div class="video-block">
-              <iframe src="https://drive.google.com/file/d/11EkK2cPyVKqZVAesG9VVLBmXaBGeeS9u/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-              <p class="video-block__caption">Animation de l'immeuble</p>
+            <div class="video-block" data-open-modal="video-fr-jour" onclick="openModal('video-fr-jour')">
+              <img class="video-block__poster" src="assets/videos/plan-large-jour.jpg" alt="Façade — Plan large, jour">
+              <svg class="video-block__play" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+              <p class="video-block__caption">Façade — Plan large, jour</p>
             </div>
-            <div class="video-block">
-              <iframe src="https://drive.google.com/file/d/1xU8L9I1kjaD705Py_mBKahfV33IYDczf/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-              <p class="video-block__caption">Animation du Carillon</p>
+            <div class="video-block" data-open-modal="video-fr-nuit" onclick="openModal('video-fr-nuit')">
+              <img class="video-block__poster" src="assets/videos/plan-large-nuit.jpg" alt="Façade — Plan large, nuit">
+              <svg class="video-block__play" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+              <p class="video-block__caption">Façade — Plan large, nuit</p>
+            </div>
+            <div class="video-block" data-open-modal="video-cu-jour" onclick="openModal('video-cu-jour')">
+              <img class="video-block__poster" src="assets/videos/plan-rapproche-jour.jpg" alt="Façade — Plan rapproché, jour">
+              <svg class="video-block__play" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+              <p class="video-block__caption">Façade — Plan rapproché, jour</p>
+            </div>
+            <div class="video-block" data-open-modal="video-cu-nuit" onclick="openModal('video-cu-nuit')">
+              <img class="video-block__poster" src="assets/videos/plan-rapproche-nuit.jpg" alt="Façade — Plan rapproché, nuit">
+              <svg class="video-block__play" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.55)"/><polygon points="26,20 26,44 46,32" fill="#fff"/></svg>
+              <p class="video-block__caption">Façade — Plan rapproché, nuit</p>
             </div>
           </div>
         </div>
@@ -422,6 +434,6 @@
   <!-- Weaving thread canvas -->
   <canvas id="weaveCanvas" class="weave-canvas" aria-hidden="true"></canvas>
 
-  <script src="js/app.js?v=20260310j"></script>
+  <script src="js/app.js?v=20260511g"></script>
 </body>
 </html>

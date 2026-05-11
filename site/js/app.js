@@ -114,7 +114,13 @@
         'assets/images/artistes/khosro/Khosro_Berah_Pic2.jpg',
         'assets/images/artistes/khosro/Khosro_Berah_Pic3.jpg',
       ]
-    }
+    },
+
+    // Vidéos panel 03 — self-hosted .mp4 (autoplay fiable car déclenché par clic user)
+    'video-fr-jour': { videoFile: 'assets/videos/plan-large-jour.mp4' },
+    'video-fr-nuit': { videoFile: 'assets/videos/plan-large-nuit.mp4' },
+    'video-cu-jour': { videoFile: 'assets/videos/plan-rapproche-jour.mp4' },
+    'video-cu-nuit': { videoFile: 'assets/videos/plan-rapproche-nuit.mp4' }
   };
 
   // Keep backward compat reference
@@ -411,6 +417,22 @@
     const data = modalData[key];
     if (!data) return;
 
+    const modalBox = document.getElementById('modal');
+
+    // Video-only modal: native HTML5 <video> avec autoplay + contrôles
+    if (data.videoFile) {
+      modalBox.classList.add('modal--video');
+      modalContent.innerHTML = `
+        <div class="modal__video-only">
+          <video src="${data.videoFile}" autoplay controls playsinline preload="auto"></video>
+        </div>
+      `;
+      modalOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+
+    modalBox.classList.remove('modal--video');
     const singleClass = data.images.length === 1 ? ' modal__gallery--single' : '';
     const reelClass = data.videoReel ? ' modal__gallery-video--reel' : '';
     const videoThumb = data.video
@@ -454,9 +476,11 @@
 
   function closeModal() {
     modalOverlay.classList.remove('is-open');
+    document.getElementById('modal').classList.remove('modal--video');
     document.body.style.overflow = '';
     // Stop any playing video
     modalContent.querySelectorAll('iframe').forEach(f => f.src = '');
+    modalContent.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
   }
 
   // ============================================================
