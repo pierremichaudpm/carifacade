@@ -120,7 +120,9 @@
     'video-fr-jour': { videoFile: 'assets/videos/plan-large-jour.mp4' },
     'video-fr-nuit': { videoFile: 'assets/videos/plan-large-nuit.mp4' },
     'video-cu-jour': { videoFile: 'assets/videos/plan-rapproche-jour.mp4' },
-    'video-cu-nuit': { videoFile: 'assets/videos/plan-rapproche-nuit.mp4' }
+    'video-cu-nuit': { videoFile: 'assets/videos/plan-rapproche-nuit.mp4' },
+    'video-annonce-large': { videoFile: 'assets/videos/video-5.mp4' },
+    'video-annonce-rapproche': { videoFile: 'assets/videos/video-6.mp4' }
   };
 
   // Keep backward compat reference
